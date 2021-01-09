@@ -21,7 +21,7 @@ const articles = [{
 app.use(express.urlencoded({extended: false}))
 
 app.get('/', (requset, response)=> {
-    response.render('articles/index', {articles: articles})
+    response.render('article_views/index', {articles: articles})
 })
-app.use('/articles', articleRouter)
+app.use('/article_views', articleRouter)
 app.listen(5000);

@@ -4,11 +4,13 @@ const Article = require('./../models/article')
 const router = express.Router()
 
 router.get('/new', (request, response) => {
-    response.render('articles/new', {article: new Article()})
+    response.render('article_views/new', {article: new Article()})
 })
 
-router.get('/:id', (request, response) => {
-    response.render('articles/new')
+router.get('/:id',async (request, response) => {
+    const article = await Article.findById(request.params.id)
+    if( article==null) response.redirect('/')
+    response.render('article_views/show', {article: article})
 })
 
 router.post('/',async (request, response) => {
@@ -17,11 +19,14 @@ router.post('/',async (request, response) => {
         description: request.body.description,
         markdown: request.body.markdown
     })
+    console.log(article)
     try {
-        await article.save()
-        response.redirect(`/articles/${article.id}`)
+        article = await article.save()
+        response.redirect(`/article_views/${article.id}`)
     } catch (error) {
-        response.render('articles/new', {article: article})
+        console.log(article)
+        console.log(error)
+        response.render('article_views/new', {article: article})
         
     }
    

@@ -10,9 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="mb-4">Blog Articles</h1>
-        <a href="/articles/new" class="btn btn-success">New Article</a>
-        <% articles.forEach(article => { %>
+        <h1 class="mb-4">Your Article</h1>        
             <div class="card mt-4">
                 <h4 class="card-title"><%= article.title%></h4>
                 <div class="sub-title text-muted mb-2">
@@ -21,9 +19,10 @@
                 <div class="card-text mb-2">
                     <%=article.description%>
                 </div>
+                <div class="card-text mb-2">
+                    <%=article.markdown%>
+                </div>
             </div>
-
-      <%  }) %>
     </div>
 </body>
 </html>
